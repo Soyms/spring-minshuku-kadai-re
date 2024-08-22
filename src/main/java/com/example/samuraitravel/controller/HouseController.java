@@ -15,13 +15,18 @@ import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.form.ReservationInputForm;
 import com.example.samuraitravel.repository.HouseRepository;
 
+
+import com.example.samuraitravel.repository.ReviewRepository;
+
 @Controller
 @RequestMapping("/houses")
 public class HouseController {
 	
- private final HouseRepository houseRepository;        
+ private final HouseRepository houseRepository;
+ private final ReviewRepository reviewRepository;
      
      public HouseController(HouseRepository houseRepository) {
+    	 this.reviewRepository = reviewRepository;
          this.houseRepository = houseRepository;            
      }     
    
@@ -76,6 +81,7 @@ public class HouseController {
          
          model.addAttribute("house", house);
          model.addAttribute("reservationInputForm", new ReservationInputForm());
+         model.addAttribute("reviews", reviewRepository.findByHouseId(id));
          
          return "houses/show";
      } 
