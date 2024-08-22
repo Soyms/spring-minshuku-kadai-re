@@ -112,6 +112,51 @@
                                          </div>                                
                                      </div>
                                      
+                                     //レビュー一覧
+                                     <h1 class="mb-4 text-center" th:text="レビュー"></h1>
+                                     <div class="row pb-2 mb-2 border-bottom">
+                                             <div class="col-4">
+                                                 <span class="fw-bold">名前</span>
+                                             </div>
+                     
+                                             <div class="col">
+                                                 <span th:text="${review.getName()}"></span>
+                                             </div>
+                                         </div>                    
+                     
+                                         <div class="row pb-2 mb-2 border-bottom">
+                                             <div class="col-4">
+                                                 <span class="fw-bold">評価</span>
+                                             </div>
+                     
+                                             <div class="col">
+                                                 <span th:text="${review.getRating()}"></span>
+                                             </div>
+                                         </div>
+                     
+                                         <div class="row pb-2 mb-2 border-bottom">
+                                             <div class="col-4">
+                                                 <span class="fw-bold">投稿日</span>
+                                             </div>
+                     
+                                             <div class="col">
+                                                 <span th:text="${review.getCreatedAt()}"></span>
+                                             </div>
+                                         </div>
+                                         
+                                         <div class="row pb-2 mb-2 border-bottom">
+                                             <div class="col-4">
+                                                 <span class="fw-bold">コメント</span>
+                                             </div>
+                     
+                                             <div class="col">
+                                                 <span th:text="${review.getDescription()}"></span>
+                                             </div>
+                                         </div>
+                                     
+                                     //
+                                      
+                                     
                                      <div sec:authorize="isAnonymous()" class="col-lg-4 px-0 ps-lg-4 mb-4">                  
                                          <div class="card">
                                              <div class="card-body">                                                                                                                                                                                                                     

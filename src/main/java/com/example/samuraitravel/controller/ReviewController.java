@@ -22,7 +22,7 @@ import com.example.samuraitravel.repository.ReviewRepository;
 import com.example.samuraitravel.service.ReviewService;
 
 @Controller
-@RequestMapping("/review")
+@RequestMapping("/reviews")
 public class ReviewController {
 	private final ReviewRepository reviewRepository;         
     
@@ -36,6 +36,6 @@ public class ReviewController {
         
         model.addAttribute("reviews", reviews);             
         
-        return "/index";
+        return "review/index";
     }  
 }

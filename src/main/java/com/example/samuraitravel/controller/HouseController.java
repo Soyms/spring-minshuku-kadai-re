@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.form.ReservationInputForm;
 import com.example.samuraitravel.repository.HouseRepository;
+import com.example.samuraitravel.repository.ReviewRepository;
 
 @Controller
 @RequestMapping("/houses")
@@ -79,4 +80,10 @@ public class HouseController {
          
          return "houses/show";
      } 
+     
+     private final ReviewRepository reviewRepository;        
+     
+     public ReviewController(ReviewRepository reviewRepository) {
+         this.reviewRepository = reviewRepository;            
+     }
 }
