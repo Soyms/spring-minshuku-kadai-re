@@ -90,14 +90,14 @@ INSERT IGNORE INTO reservations (id, house_id, user_id, checkin_date, checkout_d
 
 -- reviewテーブル
 INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (1, '侍 太郎', 1, 1, 4, '2023-04-17', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (2, '侍 花子', 2, 1, 4, '2023-04-18', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (3, '侍 義勝', 3, 1, 4, '2023-04-19', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (4, '侍 幸美', 4, 1, 4, '2023-04-20', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (5, '侍 雅', 5, 1, 4, '2023-04-23', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (6, '侍 正保', 6, 1, 4, '2023-04-24', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (7, '侍 真由美', 7, 1, 4, '2023-04-21', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (8, '侍 安民', 8, 1, 4, '2023-05-17', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (9, '侍 章緒', 9, 1, 4, '2023-04-22', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (10, '侍 祐子', 10, 1, 4, '2023-05-18', '部屋が綺麗で、快適に過ごせました。');
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (11, '侍 秋美', 11, 1, 4, '2023-04-25', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (2, '侍 花子', 1, 1, 4, '2023-04-18', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (3, '侍 義勝', 1, 1, 4, '2023-04-19', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (4, '侍 幸美', 1, 1, 4, '2023-04-20', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (5, '侍 雅', 1, 1, 4, '2023-04-23', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (6, '侍 正保', 1, 1, 4, '2023-04-24', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (7, '侍 真由美', 1, 1, 4, '2023-04-21', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (8, '侍 安民', 1, 1, 4, '2023-05-17', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (9, '侍 章緒', 1, 1, 4, '2023-04-22', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (10, '侍 祐子', 1, 1, 4, '2023-05-18', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (11, '侍 秋美', 1, 1, 4, '2023-04-25', '部屋が綺麗で、快適に過ごせました。');
 
