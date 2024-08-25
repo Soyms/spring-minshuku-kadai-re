@@ -113,46 +113,30 @@
                                      </div>
                                      
                                      //レビュー一覧
-                                     <h1 class="mb-4 text-center" th:text="レビュー"></h1>
-                                     <div class="row pb-2 mb-2 border-bottom">
-                                             <div class="col-4">
-                                                 <span class="fw-bold">名前</span>
-                                             </div>
-                     
-                                             <div class="col">
-                                                 <span th:text="${review.getName()}"></span>
-                                             </div>
-                                         </div>                    
-                     
-                                         <div class="row pb-2 mb-2 border-bottom">
-                                             <div class="col-4">
-                                                 <span class="fw-bold">評価</span>
-                                             </div>
-                     
-                                             <div class="col">
-                                                 <span th:text="${review.getRating()}"></span>
-                                             </div>
-                                         </div>
-                     
-                                         <div class="row pb-2 mb-2 border-bottom">
-                                             <div class="col-4">
-                                                 <span class="fw-bold">投稿日</span>
-                                             </div>
-                     
-                                             <div class="col">
-                                                 <span th:text="${review.getCreatedAt()}"></span>
-                                             </div>
-                                         </div>
-                                         
-                                         <div class="row pb-2 mb-2 border-bottom">
-                                             <div class="col-4">
-                                                 <span class="fw-bold">コメント</span>
-                                             </div>
-                     
-                                             <div class="col">
-                                                 <span th:text="${review.getDescription()}"></span>
-                                             </div>
-                                         </div>
+                                     <h1 class="mb-4 text-center">レビュー</h1>
+                                       <div class="container">
+                                       <div class="row pb-2 mb-2 border-bottom" th:each="review : ${reviews}">
+                                         <!-- 名前 -->
+                                       <div class="col-12">
+                                       <h4 th:text="${review.name}" class="fw-bold"></h4>
+                                       </div>
+
+                                      <!-- 評価 -->
+                                       <div class="col-12">
+                                       <span th:text="${review.rating} + ' ★'"></span>
+                                       </div>
+
+                                      <!-- 投稿日 -->
+                                      <div class="col-12">
+                                        <span th:text="${#dates.format(review.createdAt, 'yyyy-MM-dd')}"></span>
+                                      </div>
+
+                                      <!-- コメント -->
+                                      <div class="col-12">
+                                      <p th:text="${review.description}"></p>
+                                    </div>
+                                  </div>
+                               </div>
                                      
                                      //
                                       
