@@ -14,7 +14,7 @@
          
          <link th:href="@{/css/style.css}" rel="stylesheet" >
          
-         <title>レビュ一覧</title>       
+         <title>レビュ一一覧</title>       
      </head>
      <body>
          <div class="samuraitravel-wrapper">
@@ -33,9 +33,7 @@
                          <div class="col-xxl-9 col-xl-10 col-lg-11">
                              
                              <h1 class="mb-4 text-center">レビュー一覧</h1>   
-                             
-                                                                                      
-                             
+                                                                                                                                             
                              <table class="table">
                                  <thead>
                                      <tr>
@@ -48,7 +46,7 @@
                                      </tr>
                                  </thead>   
                                  <tbody>
-                                        <tr th:each="review : ${reviews}">
+                                      <tr th:each="review : ${reviewPage}">
                                         <td th:text="${review.id}"></td>
                                         <td th:text="${review.name}"></td>
                                         <td>
@@ -58,12 +56,10 @@
                                             <span th:if="${review.starNum == 3}">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
                                             <span th:if="${review.starNum == 4}">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
                                             <span th:if="${review.starNum == 5}">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                                        </td> 
-                                            <td th:text="${review.createdAt}"></td>
-                                            <td th:text="${review.description}"></td>
-                                            <td><a href="#">詳細</a></td>
-                                        </tr>
-                                        </tbody>
+                                       　</td> 
+                                            
+                                      </tr>
+                                  </tbody>
 
                              </table>                                       
                          </div>　　　　　　　　　　　　　　

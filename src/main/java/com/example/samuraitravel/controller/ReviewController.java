@@ -19,7 +19,7 @@ import com.example.samuraitravel.form.ReviewRegisterForm;
 import com.example.samuraitravel.service.ReviewService;
 
 @Controller
-@RequestMapping("/reviews")
+@RequestMapping("/houses/{houseId}/reviews")
 public class ReviewController {
     private final ReviewService reviewService;
     
@@ -72,5 +72,6 @@ public class ReviewController {
         reviewService.deleteReview(reviewId);
         return "redirect:/reviews";
     }
+    
 }
 

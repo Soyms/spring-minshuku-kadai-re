@@ -42,5 +42,4 @@ public class Review {
     @Column(name = "description")
     private String description;
   
-
 }
