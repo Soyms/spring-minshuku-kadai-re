@@ -89,7 +89,7 @@ INSERT IGNORE INTO reservations (id, house_id, user_id, checkin_date, checkout_d
 INSERT IGNORE INTO reservations (id, house_id, user_id, checkin_date, checkout_date, number_of_people, amount) VALUES (11, 11, 1, '2023-04-01', '2023-04-02', 2, 6000);
 
 -- reviewテーブル
-INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (1, '侍 太郎', 1, 1, 4, '2023-04-17', '部屋が綺麗で、快適に過ごせました。');
+INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (1, '侍 一郎', 1, 1, 4, '2023-04-17', '部屋が綺麗で、快適に過ごせました。');
 INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (2, '侍 花子', 1, 1, 4, '2023-04-18', '部屋が綺麗で、快適に過ごせました。');
 INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (3, '侍 義勝', 1, 1, 4, '2023-04-19', '部屋が綺麗で、快適に過ごせました。');
 INSERT IGNORE INTO review (id, name, house_id, user_id, rating, created_at, description) VALUES (4, '侍 幸美', 1, 1, 4, '2023-04-20', '部屋が綺麗で、快適に過ごせました。');
