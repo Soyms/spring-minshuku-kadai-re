@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
  <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">    
      <head>
          <div th:replace="~{fragment :: meta}"></div>   
@@ -10,7 +10,7 @@
            
          <title>民宿詳細</title>   
      </head>
-     <bodyy>
+     <body>
          <div class="samuraitravel-wrapper">
              <!-- ヘッダー -->
              <div th:replace="~{fragment :: header}"></div>
@@ -111,7 +111,7 @@
                                              </div>
                                          </div>                                
                                      </div>
-                                                                                                                                                                                                                                                                                     
+                                     
                                      <div sec:authorize="isAnonymous()" class="col-lg-4 px-0 ps-lg-4 mb-4">                  
                                          <div class="card">
                                              <div class="card-body">                                                                                                                                                                                                                     
@@ -121,7 +121,7 @@
                                          </div>  
                                      </div>
                                      
-                                      <div sec:authorize="isAuthenticated()" class="col-lg-4 px-0 ps-lg-4 mb-4">                  
+                                     <div sec:authorize="isAuthenticated()" class="col-lg-4 px-0 ps-lg-4 mb-4">                  
                                          <div class="card">
                                              <div class="card-body"> 
                                                  <form method="get" th:action="@{/houses/__${house.getId()}__/reservations/input}" th:object="${reservationInputForm}">                                                                                                                                                                       
@@ -142,117 +142,97 @@
                                                      </div>
                                                  </form>                                                                     
                                              </div>
-                                           </div>
-                                        </div>
-                                        
-                                        　　　　　　　　　　　　　<!--■本人であれば、編集・削除ボタンを付ける-->
-																<span sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.id == review.getUser().getId()}">
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!--編集ボタン-->
-																	<a th:href="@{/houses/__${house.getId()}__/reviews/__${review.getId()}__/reviewEdit}" class="me-2">編集</a>
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!--■削除ボタン(モーダルを指定)-->
-																	<a href="#" class="samuraitravel-link-danger" data-bs-toggle="modal" th:data-bs-target="${'#deleteReviewModal' + review.getId()}">削除</a>
-																	
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!--■削除用モーダル-->
-																	<div class="modal fade" th:id="${'deleteReviewModal' + review.getId()}" tabindex="-1" th:aria-labelledby="${'deleteReviewModalLabel' + review.getId()}">
-																	<div class="modal-dialog">
-																	<div class="modal-content">
-																				
-																			<div class="modal fade" th:id="${'deleteHouseModal' + house.getId()}" tabindex="-1" th:aria-labelledby="${'deleteHouseModalLabel' + house.getId()}">
-							                                            
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!--■削除確認-->
-																				<div class="modal-header">
-																					<h5 class="modal-title" th:id="${'deleteReviewModalLabel' + review.getId()}" th:text="${house.getName() + 'のレビューを削除してもよろしいですか？'}"></h5>
-																					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
-																				</div>
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!--■削除実行ボタン-->
-																				<div class="modal-footer">
-																					<form method="post" th:action="@{/houses/__${house.getId()}__/reviews/__${review.getId()}__/delete}">
-																						<button type="submit" class="btn samuraitravel-btn-danger text-white shadow-sm">削除</button>
-																					</form>
-																				</div>
-																				
-																	        </div>
-																	</div>
-																	</div>
-																	</div>
-																</span>
-
-                                     <!-- レビュー -->
-                                 <h1 class="mb-4 text-center">レビュー</h1>
-                                 <div class="container"> <!-- 2列分割 -->
-                                  <div class="row">
-                                       </div class="container">
-                                       <div class="row pb-2 mb-2 border-bottom" th:each="review : ${reviews}">
-                                         <!-- 名前 -->
-                                       <div class="col-12">
-                                       <h4 th:text="${review.name}" class="fw-bold"></h4>
-                                       </div>
-
-                                      <!-- 評価 -->
-                                       <div class="col-12">
-                                       <span th:text="${review.rating} + ' ★'"></span>
-                                       </div>
-
-                                      <!-- 投稿日 -->
-                                      <div class="col-12">
-                                        <span th:text="${#dates.format(review.createdAt, 'yyyy-MM-dd')}"></span>
-                                      </div>
-
-                                      <!-- コメント -->
-                                      <div class="col-12">
-                                      <p th:text="${review.description}"></p>
-                                      </div>
-                                    </div> 
-                                   </div>                                                                   
-                                 </div>
-                               
-                                  <!-- すべてのレビューを見る -->
-                                  <div> 
-									  <div>
-                                        <a th:href="@{/review/index}" class="mb-4 text-center">すべてのレビューを見る</a>
-                                      </div>
-                                      <!-- レビューがない時 -->
-                                      <div>
-									       <a　class="mb-4 text-center">まだレビューはありません</a>
-								      </div>
-                                      <div th:unless="${#lists.isEmpty(reviews)}" class="row row-cols-1 row-cols-md-2 g-4 mb-4">
-                                         <div th:each="review : ${reviews}">
-                                          <div class="col">
-                                           <div class="card">
-                                            <div class="card-body">
-                                               <div class="d-flex justify-content-between">
-                                                    <h5 class="card-title" th:text="${review.getUser().getName()}"></h5>
-                                               </div>                                              
-                                                 <p class="card-text mb-1">
-                                                   <span class="samuraitravel-star" th:each="star : ${#numbers.sequence(1, 5)}" th:text="${star <= review.getScore()} ? '&#9733;' : '&#9734;'"></span>
-                                                 </p>                      
-                                                   <p class="card-text"><small class="text-muted" th:text="${#dates.format(review.getCreatedAt(), 'yyyy年MM月dd日')}"></small></p>                              
-                                                   <p class="card-text" th:text="${review.getContent()}"></p>
-                                            </div>
-                                           </div>
-                                         </div>
-                                        </div>                                     
-                                       </div> 
-                                      
-                                  </div>
-                                     
-                                    <!-- ログイン時のみレビュー投稿ボタン -->
-                                     <div sec:authorize="isAuthenticated()" class="text-center mb-4">
-                                       <a th:href="@{/reviewregister/show}" class="btn text-white shadow-sm samuraitravel-btn">レビューを投稿する</a>
+                                         </div>  
                                      </div>
-						   </di>
-                          </div> 
-               
-                        </div>                                                                                                                     
-                      </div>                                                                                             
-                    </div>
-                  </div>                                     
-              </main>
+                                                                     
+
+                                     
+                                                                          <!-- レビュー -->
+                                                                     <h1 class="mb-4 text-center">レビュー</h1>
+                                                                     
+                                                                         <!-- ログイン時のみレビュー投稿ボタン -->
+                                                                           <div sec:authorize="isAuthenticated()" class="text-center mb-4">
+                                                                                <a th:href="@{/reviewregister/show}" class="btn text-white shadow-sm samuraitravel-btn">レビューを投稿する</a>
+                                                                           </div>
+                                                                     
+                                                                         <!-- 2列分割 -->
+                                                                          <div class="container">
+	                                                                        <div class="row">
+		                                                                       <div class="col-md-6" th:each="review : ${reviews}">
+			                                                                      <div class="card m-1 p-2">
+				                                                                      <div class="card-body">
+					                                                                    <div>
+																							<!-- 名前 -->
+						                                                                      <h4 th:text="${review.name}">ユーザー名</h4>
+						                                                                     <!-- 評価 -->
+                                                                                              <div class="col-12">
+																								  
+                                                                                                <span th:text="${review.rating} + ' ★'"></span>
+                                                                                                
+                                                                                              </div>
+
+                                                                                              <!-- 投稿日 -->
+                                                                                              <div class="col-12">
+                                                                                                 <span th:text="${#dates.format(review.createdAt, 'yyyy-MM-dd')}"></span>
+                                                                                              </div>
+
+                                                                                               <!-- コメント -->
+                                                                                               <div class="col-12">
+                                                                                                   <p th:text="${review.description}"></p>
+                                                                                               </div>						                                                                   						                                                                  
+						                                                                   
+					                                                                    </div>
+				                                                                      </div>
+			                                                                      </div>
+		                                                                      </div>
+	                                                                        </div>
+                                                                          </div>
+                                                                   
+                                                                         
+                                                                           
+                                                                                                                                          
+                                                                   
+
+                                                                      <!-- すべてのレビューを見る -->
+                                                                      <div>
+                                                                        <a th:href="@{/review/index}" class="mb-4 text-center">すべてのレビューを見る</a>
+                                                                      </div>
+                                                                      <!-- レビューがない時 -->
+                                                                      <div>
+                                                                          <a　class="mb-4 text-center">まだレビューはありません</a>
+                                                                       </div>
+                                                                       <div th:unless="${#lists.isEmpty(reviews)}" class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                                                                         <div th:each="review : ${reviews}">
+                                                                          <div class="col">
+                                                                           <div class="card">
+                                                                            <div class="card-body">
+                                                                               <div class="d-flex justify-content-between">
+                                                                                    <h5 class="card-title" th:text="${review.getUser().getName()}"></h5>
+                                                                               </div>                                              
+                                                                                 <p class="card-text mb-1">
+                                                                                   <span class="samuraitravel-star" th:each="star : ${#numbers.sequence(1, 5)}" th:text="${star <= review.getScore()} ? '&#9733;' : '&#9734;'"></span>
+                                                                                 </p>                      
+                                                                                   <p class="card-text"><small class="text-muted" th:text="${#dates.format(review.getCreatedAt(), 'yyyy年MM月dd日')}"></small></p>                              
+                                                                                   <p class="card-text" th:text="${review.getContent()}"></p>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                         </div>                                     
+                                                                       </div>
+
+                                                                       
+
+
+                                 </div>                                                                                             
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </main>
              
-               <!-- フッター -->
+             <!-- フッター -->
              <div th:replace="~{fragment :: footer}"></div>
-            </div>
-             
+         </div>    
          
          <div th:replace="~{fragment :: scripts}"></div> 
          
