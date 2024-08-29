@@ -132,6 +132,10 @@
     color: #9734;  /* デフォルトの星の色: グレー */
 }
 
+.div{
+	justify-content: center;
+}
+
 /* 星のスタイル */
 .stars::before {
     content: "★★★★★"; /* 星5つをデフォルトで表示 */

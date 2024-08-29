@@ -152,22 +152,86 @@
                                                                      
                                                                          <!-- ログイン時のみレビュー投稿ボタン -->
                                                                            <div sec:authorize="isAuthenticated()" class="text-center mb-4">
-                                                                                <a th:href="@{/reviewregister/show}" class="btn text-white shadow-sm samuraitravel-btn">レビューを投稿する</a>
+                                                                                <a th:href="@{/review/register}" class="btn text-white shadow-sm samuraitravel-btn">レビューを投稿する</a>
                                                                            </div>
                                                                      
-                                                                         <!-- 2列分割 -->
-                                                                          <div class="container">
-	                                                                        <div class="row">
-		                                                                       <div class="col-md-6" th:each="review : ${reviews}">
-			                                                                      <div class="card m-1 p-2">
-				                                                                      <div class="card-body">
-					                                                                    <div>
-																							<!-- 名前 -->
-						                                                                      <h4 th:text="${review.name}">ユーザー名</h4>
+                                                                    <!--■HouseControllerで設定した<List>のreviewsが空であれば-->
+                                                                         <div th:if="${#lists.isEmpty(reviews)}" class="mb-4">
+											                             <p class="text-center">まだレビューがありません。</p>
+										                                </div>
+										
+<!--									■HouseControllerで設定した<List>のreviewsが空でなければ-->
+										<div th:unless="${#lists.isEmpty(reviews)}" class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+<!--										■reviewはreviewsリストの中の一つ一つのレビューを参照するために使われる変数名-->
+											<div th:each="review : ${reviews}">
+												<div class="col">
+													<div class="card">
+														<div class="card-body">
+															
+															
+															
+															<div class="d-flex justify-content-between">
+																
+<!--						     								■投稿者名：Reviewsに格納されている、nameを持ってくる-->
+																<h5 class="card-title" th:text="${review.getName()}"></h5>
+																
+<!--															■本人であれば、編集・削除ボタンを付ける-->
+																<span sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.id == review.getUser().getId()}">
+																	
+<!--																■編集ボタン-->
+																	<a th:href="@{/houses/__${house.getId()}__/reviews/__${review.getId()}__/reviewEdit}" class="me-2">編集</a>
+<!--																■削除ボタン(モーダルを指定)-->
+																	<a href="#" class="samuraitravel-link-danger" data-bs-toggle="modal" th:data-bs-target="${'#deleteReviewModal' + review.getId()}">削除</a>
+																	
+<!--																■削除用モーダル-->
+																	<div class="modal fade" th:id="${'deleteReviewModal' + review.getId()}" tabindex="-1" th:aria-labelledby="${'deleteReviewModalLabel' + review.getId()}">
+																	<div class="modal-dialog">
+																	<div class="modal-content">
+																				
+																			<div class="modal fade" th:id="${'deleteHouseModal' + house.getId()}" tabindex="-1" th:aria-labelledby="${'deleteHouseModalLabel' + house.getId()}">
+							                                            
+<!--																			■削除確認-->
+																				<div class="modal-header">
+																					<h5 class="modal-title" th:id="${'deleteReviewModalLabel' + review.getId()}" th:text="${house.getName() + 'のレビューを削除してもよろしいですか？'}"></h5>
+																					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+																				</div>
+<!--																			■削除実行ボタン-->
+																				<div class="modal-footer">
+																					<form method="post" th:action="@{/houses/__${house.getId()}__/reviews/__${review.getId()}__/delete}">
+																						<button type="submit" class="btn samuraitravel-btn-danger text-white shadow-sm">削除</button>
+																					</form>
+																				</div>
+																				
+																	</div>
+																	</div>
+																	</div>
+																</span>
+																
+															</div>     
 						                                                                     <!-- 評価 -->
                                                                                               <div class="col-12">
-																								  
-                                                                                                <span th:text="${review.rating} + ' ★'"></span>
+																							<!-- 	<th:block th:each="review.rating : ${#numbers.sequence(0,5)}"> -->
+                                                                                                <p th:text=${review.rating}>
+																								 <th:block th:if="${review.rating == 0}">
+                                                                                                  <p>&#9734;&#9734;&#9734;&#9734;&#9734;</p>
+                                                                                                 </th:block> 
+                                                                                                 <th:block th:if="${review.rating == 1}">   
+                                                                                                  <p>&#9733;&#9734;&#9734;&#9734;&#9734;</p>
+                                                                                                 </th:block>
+                                                                                                 <th:block th:if="${review.rating == 2}"> 
+                                                                                                  <p>&#9733;&#9733;&#9734;&#9734;&#9734;</p>
+                                                                                                 </th:block> 
+                                                                                                 <th:block th:if="${review.rating == 3}">  
+                                                                                                  <p>&#9733;&#9733;&#9733;&#9734;&#9734;</p>
+                                                                                                 </th:block>
+                                                                                                 <th:block th:if="${review.rating == 4}">  
+                                                                                                  <p>&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                                                                                                 </th:block>
+                                                                                                 <th:block th:if="${review.rating == 5}"> 
+                                                                                                  <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                                                                                                 </th:block>
+                                                                                                 
+                                                                                               <!--  </th:block> -->
                                                                                                 
                                                                                               </div>
 
@@ -185,44 +249,15 @@
 				                                                                      </div>
 			                                                                      </div>
 		                                                                      </div>
-	                                                                        </div>
-                                                                          </div>
-                                                                   
+	                                                                        
+                                                                         <!-- すべてのレビューを見る -->
                                                                          
-                                                                           
-                                                                                                                                          
-                                                                   
-
-                                                                      <!-- すべてのレビューを見る -->
-                                                                      <div>
-                                                                        <a th:href="@{/review/index}" class="mb-4 text-center">すべてのレビューを見る</a>
-                                                                      </div>
-                                                                      <!-- レビューがない時 -->
-                                                                      <div>
-                                                                          <a　class="mb-4 text-center">まだレビューはありません</a>
-                                                                       </div>
-                                                                       <div th:unless="${#lists.isEmpty(reviews)}" class="row row-cols-1 row-cols-md-2 g-4 mb-4">
-                                                                         <div th:each="review : ${reviews}">
-                                                                          <div class="col">
-                                                                           <div class="card">
-                                                                            <div class="card-body">
-                                                                               <div class="d-flex justify-content-between">
-                                                                                    <h5 class="card-title" th:text="${review.getUser().getName()}"></h5>
-                                                                               </div>                                              
-                                                                                 <p class="card-text mb-1">
-                                                                                   <span class="samuraitravel-star" th:each="star : ${#numbers.sequence(1, 5)}" th:text="${star <= review.getScore()} ? '&#9733;' : '&#9734;'"></span>
-                                                                                 </p>                      
-                                                                                   <p class="card-text"><small class="text-muted" th:text="${#dates.format(review.getCreatedAt(), 'yyyy年MM月dd日')}"></small></p>                              
-                                                                                   <p class="card-text" th:text="${review.getContent()}"></p>
-                                                                              </div>
-                                                                            </div>
+                                                                          <div>
+                                                                            <a th:href="@{/review/index}" class="mb-4 text-center">すべてのレビューを見る</a>
                                                                           </div>
-                                                                         </div>                                     
-                                                                       </div>
-
-                                                                       
-
-
+                                                                        
+                                                                 </div>
+   
                                  </div>                                                                                             
                              </div>
                          </div>

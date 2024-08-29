@@ -19,7 +19,7 @@ import com.example.samuraitravel.form.ReviewRegisterForm;
 import com.example.samuraitravel.service.ReviewService;
 
 @Controller
-@RequestMapping("/houses/{houseId}/reviews")
+@RequestMapping("/review")
 public class ReviewController {
     private final ReviewService reviewService;
     
@@ -28,19 +28,19 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
     
-    @GetMapping("/house/{house_id}")
+    @GetMapping("/index/{house_id}")
     public String getReviews(@PathVariable Integer house_id, Model model) {
         House house = new House();
         house.setId(house_id);
         List<Review> reviews = reviewService.findByHouse(house);
         model.addAttribute("reviews", reviews);
-        return "reviews/index";
+        return "review/index";
     }
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("reviewRegisterForm", new ReviewRegisterForm());
-        return "reviews/register";          
+        return "review/register";          
     }
 
     @PostMapping("/register")
@@ -58,19 +58,19 @@ public class ReviewController {
         form.setDescription(review.getDescription());
         form.setRating(Integer.parseInt(review.getRating()));
         model.addAttribute("reviewEditForm", form);
-        return "reviews/edit";
+        return "review/edit";
     }
 
     @PostMapping("/edit/{id}")
     public String editReview(@PathVariable Integer id, @ModelAttribute ReviewEditForm form) {
         reviewService.updateReview(id, form);
-        return "redirect:/reviews/house/" + form.getHouseId();
+        return "redirect:/review/house/" + form.getHouseId();
     }
 
     @DeleteMapping("/{reviewId}")
     public String deleteReview(@PathVariable Integer reviewId) {
         reviewService.deleteReview(reviewId);
-        return "redirect:/reviews";
+        return "redirect:/review";
     }
     
 }
