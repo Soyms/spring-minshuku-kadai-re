@@ -16,31 +16,35 @@ import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.entity.Review;
 import com.example.samuraitravel.form.ReviewEditForm;
 import com.example.samuraitravel.form.ReviewRegisterForm;
+import com.example.samuraitravel.repository.HouseRepository;
 import com.example.samuraitravel.service.ReviewService;
 
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
     private final ReviewService reviewService;
-    
+
+    private final HouseRepository houseRepository;
+
     @Autowired
-    public ReviewController(ReviewService reviewService) {
+    public ReviewController(ReviewService reviewService, HouseRepository houseRepository) {
         this.reviewService = reviewService;
+        this.houseRepository = houseRepository;
     }
-    
+
     @GetMapping("/index/{house_id}")
     public String getReviews(@PathVariable Integer house_id, Model model) {
-        House house = new House();
-        house.setId(house_id);
+        House house = houseRepository.getReferenceById(house_id);
         List<Review> reviews = reviewService.findByHouse(house);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("id", house_id);
         return "review/index";
     }
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("reviewRegisterForm", new ReviewRegisterForm());
-        return "review/register";          
+        return "review/register";
     }
 
     @PostMapping("/register")
@@ -72,6 +76,5 @@ public class ReviewController {
         reviewService.deleteReview(reviewId);
         return "redirect:/review";
     }
-    
-}
 
+}

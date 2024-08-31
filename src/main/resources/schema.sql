@@ -56,12 +56,14 @@ CREATE TABLE IF NOT EXISTS houses (
      FOREIGN KEY (user_id) REFERENCES users (id)
  );
  
- CREATE TABLE IF NOT EXISTS review (
+CREATE TABLE IF NOT EXISTS review (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    house_id INT  NOT NULL ,
-    user_id INT NOT NULL ,
+    house_id INT  NOT NULL,
+    user_id INT NOT NULL,
     rating INT NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    description VARCHAR(255) NOT NULL 
+    description VARCHAR(255) NOT NULL,
+    FOREIGN KEY (house_id) REFERENCES houses (id),
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );

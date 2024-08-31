@@ -1,5 +1,7 @@
 package com.example.samuraitravel.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.samuraitravel.entity.House;
+import com.example.samuraitravel.entity.Review;
 import com.example.samuraitravel.form.ReservationInputForm;
 import com.example.samuraitravel.repository.HouseRepository;
 import com.example.samuraitravel.repository.ReviewRepository;
@@ -22,7 +25,6 @@ public class HouseController {
     private final HouseRepository houseRepository;
     private final ReviewRepository reviewRepository;
 
-    
     public HouseController(HouseRepository houseRepository, ReviewRepository reviewRepository) {
         this.houseRepository = houseRepository;
         this.reviewRepository = reviewRepository;
@@ -30,18 +32,20 @@ public class HouseController {
 
     @GetMapping
     public String index(@RequestParam(name = "keyword", required = false) String keyword,
-                        @RequestParam(name = "area", required = false) String area,
-                        @RequestParam(name = "price", required = false) Integer price,
-                        @RequestParam(name = "order", required = false) String order,
-                        @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
-                        Model model) {
+            @RequestParam(name = "area", required = false) String area,
+            @RequestParam(name = "price", required = false) Integer price,
+            @RequestParam(name = "order", required = false) String order,
+            @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
+            Model model) {
         Page<House> housePage;
 
         if (keyword != null && !keyword.isEmpty()) {
             if (order != null && order.equals("priceAsc")) {
-                housePage = houseRepository.findByNameLikeOrAddressLikeOrderByPriceAsc("%" + keyword + "%", "%" + keyword + "%", pageable);
+                housePage = houseRepository.findByNameLikeOrAddressLikeOrderByPriceAsc("%" + keyword + "%",
+                        "%" + keyword + "%", pageable);
             } else {
-                housePage = houseRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc("%" + keyword + "%", "%" + keyword + "%", pageable);
+                housePage = houseRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc("%" + keyword + "%",
+                        "%" + keyword + "%", pageable);
             }
         } else if (area != null && !area.isEmpty()) {
             if (order != null && order.equals("priceAsc")) {
@@ -62,7 +66,7 @@ public class HouseController {
                 housePage = houseRepository.findAllByOrderByCreatedAtDesc(pageable);
             }
         }
-        
+
         model.addAttribute("housePage", housePage);
         model.addAttribute("keyword", keyword);
         model.addAttribute("area", area);
@@ -77,7 +81,9 @@ public class HouseController {
         House house = houseRepository.getReferenceById(id);
         model.addAttribute("house", house);
         model.addAttribute("reservationInputForm", new ReservationInputForm());
-        model.addAttribute("reviews", reviewRepository.findByHouse(house));
+        List<Review> review = reviewRepository.findByHouse(house);
+        model.addAttribute("reviews", review);
+        model.addAttribute("id", id);
         return "houses/show";
     }
 }

@@ -1,4 +1,4 @@
- html {
+  html {
    font-size: 14px;
  }
  
@@ -137,14 +137,10 @@
 }
 
 /* 星のスタイル */
-.block {
-    content: "★★★★★"; /* 星5つをデフォルトで表示 */
-    letter-spacing: 3px; /* 星の間隔 */
-    background: linear-gradient(90deg, #9733 var(--rating), #9734 var(--rating)); /* 評価に応じた星の色 */
-    
-    -webkit-text-fill-color: transparent; /* 透明なテキスト */
+.star-outline {
+  color: transparent;
+  text-shadow: 0 0 0 sandybrown;
 }
-
  
  
  @media screen and (min-width: 1400px) {
